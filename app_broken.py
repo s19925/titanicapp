@@ -4,6 +4,7 @@ import streamlit as st
 import pickle
 from datetime import datetime
 startTime = datetime.now()
+
 # import znanych nam bibliotek
 
 import pathlib
@@ -16,6 +17,7 @@ filename = "model.sv"
 model = pickle.load(open(filename,'rb'))
 # otwieramy wcześniej wytrenowany model
 
+sex_d ={0:"Mężczyzna",1:"Kobieta"}
 pclass_d = {0:"Pierwsza",1:"Druga", 2:"Trzecia"}
 embarked_d = {0:"Cherbourg", 1:"Queenstown", 2:"Southampton"}
 # o ile wcześniej kodowaliśmy nasze zmienne, to teraz wprowadzamy etykiety z ich nazewnictwem
@@ -33,9 +35,9 @@ def main():
 		st.title("Titanic App")
 
 	with left:
-		sex_radio = st.radio( "Płeć", list(sex_d.keys()), format_func=lambda x : sex_d[x] )
+		sex_radio = st.radio( "Płeć", list(sex_d.keys()), format_func=lambda x : sex_d[x])
 		pclass_radio = st.radio("Class",list(pclass_d.keys()),index = 2,format_func = lambda x:pclass_d[x])
-		embarked_radio = st.radio( "Port zaokrętowania", list(embarked_d.keys()), index=2, format_func= lambda x: embarked_d[x] )
+		embarked_radio = st.radio( "Port zaokrętowania", list(embarked_d.keys()), index=2, format_func= lambda x: embarked_d[x])
 
 	with right:
 		age_slider = st.slider("Wiek", value=1, min_value=1, max_value=90)
